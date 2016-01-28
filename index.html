@@ -17,6 +17,15 @@
   <style>
     body {
       text-align: center;
+
+    }
+    .card {
+     overflow: hidden;
+     position: relative;
+     width: 23%;
+     display: inline-block;
+     margin: 0 2px;
+     position: relative;
     }
 
     .avatarBox {
@@ -33,6 +42,7 @@
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       border-radius: 50%;
+
     }
   </style>
   <h1>Git User Profile Search</h1>
@@ -43,7 +53,7 @@
         <button class="btn btn-success btn-xs" ng-click="searchCtrl.doSearch()">Search</button>
       </form>
       <ul class="list-group">
-        <li ng-repeat="user in searchCtrl.searchResult.items" ng-show="searchCtrl.searchTerm">
+        <li class="card" ng-repeat="user in searchCtrl.searchResult.items" ng-show="searchCtrl.searchTerm">
           <img class="avatarBox" ng-src="{{user.avatar_url}}&"height = "100px", width = "100px">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
         </li>
