@@ -13,5 +13,15 @@ githubUserSearch.factory('Search', ['$http', function($http) {
         }
       });
     }
+
+    // getUserInfo: function(user_url) {
+    //   return $http({
+    //     url: user_url,
+    //     method: 'GET',
+    //     params: {
+    //       'access_token': gitAccessToken
+    //     }
+    //   });
+    // }
   };
 }]);

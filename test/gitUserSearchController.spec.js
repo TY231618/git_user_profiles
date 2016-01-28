@@ -11,43 +11,52 @@ describe('GitUserSearchController', function() {
     expect(ctrl.searchResult).toBeUndefined();
     expect(ctrl.searchTerm).toBeUndefined();
   });
+});
+describe('when searching for a user', function() {
 
-  describe('when searching for a user', function() {
+  // var httpBackend;
+  //
+  // afterEach(function() {
+  //   httpBackend.verifyNoOutstandingExpectation();
+  //   httpBackend.verifyNoOutstandingRequest();
+  //  });
 
-    var httpBackend;
 
-    beforeEach(inject(function($httpBackend) {
-      httpBackend = $httpBackend
-      httpBackend
-        .expectGET("https://api.github.com/search/users?access_token=" + gitAccessToken + "&q=hello")
-        .respond(
-          { items: items }
-        );
-    }));
-
-    afterEach(function() {
-      httpBackend.verifyNoOutstandingExpectation();
-      httpBackend.verifyNoOutstandingRequest();
-     });
-
-    var items = [
-      {
-        "login": "tansaku",
-        "avatar_url": "https://avatars.githubusercontent.com/u/30216?v=3",
-        "html_url": "https://github.com/tansaku"
-      },
-      {
-        "login": "stephenlloyd",
-        "avatar_url": "https://avatars.githubusercontent.com/u/196474?v=3",
-        "html_url": "https://github.com/stephenlloyd"
-      }
-    ];
-
-    it('displays search results', function() {
-      ctrl.searchTerm = 'hello';
-      ctrl.doSearch();
-      httpBackend.flush();
-      expect(ctrl.searchResult.items).toEqual(items);
+  beforeEach(module('GitUserSearch'));
+    var ctrl;
+    var fakeUserInfo;
+    var scope;
+    beforeEach(function(){
+      module(function($provide) {
+        fakeUserInfo = jasmine.createSpyObj('fakeUserInfo', ['query']);
+        $provide.factory('Search', function() {
+          return fakeUserInfo;
+        });
+      });
     });
+
+  beforeEach(inject(function ($q, $rootScope) {
+    scope = $rootScope;
+    fakeUserInfo.query.and.returnValue($q.when(items));
+  }));
+
+  beforeEach(inject(function($controller) {
+    ctrl = $controller('GitUserSearchController');
+  }));
+
+  var items = {'data': [
+    {
+      "login": "tansaku",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30216?v=3",
+      "html_url": "https://github.com/tansaku"
+    }
+  ]};
+
+  it('displays search results', function() {
+    ctrl.searchTerm = 'hello';
+    ctrl.doSearch();
+    scope.$apply();
+    expect(ctrl.searchResult).toEqual(items.data);
   });
+
 });
