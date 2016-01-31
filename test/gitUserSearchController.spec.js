@@ -14,14 +14,6 @@ describe('GitUserSearchController', function() {
 });
 describe('when searching for a user', function() {
 
-  // var httpBackend;
-  //
-  // afterEach(function() {
-  //   httpBackend.verifyNoOutstandingExpectation();
-  //   httpBackend.verifyNoOutstandingRequest();
-  //  });
-
-
   beforeEach(module('GitUserSearch'));
     var ctrl;
     var fakeUserInfo;

@@ -1,10 +1,10 @@
 describe('Github Profile finder', function() {
-  var searchBox = element(by.model('searchCtrl.searchTerm'))
-  var searchButton = element(by.className('btn'))
+  var searchBox = element(by.model('searchCtrl.searchTerm'));
+  var searchButton = element(by.className('btn'));
 
   beforeEach(function() {
     browser.get('http://localhost:8080');
-  })
+  });
 
   it('has a title', function() {
     expect(browser.getTitle()).toEqual('Github user search');

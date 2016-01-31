@@ -28,6 +28,7 @@
         <li class="card" ng-repeat="user in searchCtrl.searchResult.items" ng-show="searchCtrl.searchTerm">
           <img class="avatarBox" ng-src="{{user.avatar_url}}&"height = "100px", width = "100px">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
+          {{user.repos_url.name}}
         </li>
       </ul>
     </div>

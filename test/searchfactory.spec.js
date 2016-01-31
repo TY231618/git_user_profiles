@@ -43,3 +43,6 @@ describe('factory: Search', function() {
     httpBackend.flush();
   });
 });
+
+
+// "https://api.github.com/search/users?access_token=72857bd36b4cf172f8342069dfb6c0f7056f73e7&q=TY231618"
